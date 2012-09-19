@@ -1,0 +1,40 @@
+<html>
+<head>
+	<style>
+		body {
+			font-family:"Abadi MT W02 Exra Light","HelveticaNeueW01-45Ligh","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ static_url("config.js") }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				type = $("#type").val();
+				batch = $("#batch").val();
+				videos = $("textarea").val();
+				$.post(
+					base_url + "secret_admin_page",
+					"type=" + type + "&batch=" + batch + "&videos=" + videos,
+					function(dat) {
+						$("#type").val("");
+						$("#batch").val("");
+						$("textarea").val("");
+					},
+					"json"
+				);
+				return false;
+			});
+		});
+	</script>
+</head>
+<body>
+	<div>
+		This is the page for administrator to use only!
+	</div>
+	T <input type="text" id="type"><br/>
+	B <input type="text" id="batch"><br/>
+	VL<textarea cols="50" rows="5"></textarea><br/>
+	<a href="#" id="submit">Submit</a>
+</body>
+</html>

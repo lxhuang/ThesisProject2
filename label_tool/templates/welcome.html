@@ -1,0 +1,80 @@
+<html>
+
+<head>
+	<style>
+		body {
+			font-family:"Abadi MT W02 Exra Light","HelveticaNeueW01-45Ligh","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ static_url("config.js") }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				turkId = $("#amazon_turk_id").val();
+				turkId = jQuery.trim(turkId);
+				if (turkId == "") {
+					alert("You have to input Amazon Turk ID.");
+					return false;
+				}
+				if (turkId.indexOf(" ") != -1) {
+					alert("Valid Amazon Turk ID should not contain space.");
+					return false;
+				}
+				$.post(
+					base_url,
+					"tid=" + turkId,
+					function(dat) {
+						if (dat.success == 1) {
+							batch = dat.batch;
+							label_type = dat.type;
+							window.location.href = base_url + "label?tid=" + turkId + "&batch=" + batch + "&type=" + label_type;
+						} else if (dat.success == -2) {
+							alert("There are no more tasks.");
+						} else {
+							alert("Sorry you cannot participate in this session. Maybe you could come back later.");
+						}
+					},
+					"json"
+				);
+				return false;
+			});
+		});
+	</script>
+</head>
+
+<body>
+	Thank you for participating in our human behavior study. In this study, you are going to watch 14 videos (each is about 2~3 minutes long). Each video features a person's nonverbal reaction when s/he was watching a video. Your task is to label the occurrence of <span>head nod</span> in each video as accurately as possible.<br/><br/>
+
+	<div style="margin-top:10px;">
+		In order to label the videos, you have to use the tool shown as below. Here is a short tutorial:
+		<ol>
+			<li>Press the space bar to start loading the video. The loading progress will be shown in the Box 1.</li>
+			<li>After the video is loaded, press the space bar to start playing the video.</li>
+			<li>While the video is playing, pay attention to the occurrence of <span>head nod</span>. <span>Head nod</span> usually lasts for a period of time.</li>
+			<li>At the beginning of each head nod, press the space bar and hold it; release the space bar until the head nod ends.</li>
+		</ol>
+	</div>
+
+	<div style="margin-top:20px;">
+		<img src="{{ escape(handler.settings["base_url"])+"static/img/label_tool.png" }}" width="60%" height="60%"/>
+	</div>
+	<hr/>
+
+	<div>
+		Please input your Amazon Turk ID: <input id="amazon_turk_id" type="text" size="40"/><a href="#" id="submit">Start</a>
+	</div>
+	<div style="font-weight:bold;">
+		(This is very important. We will validate the data you provide later and approve your work using your Amazon Turk ID.)
+	</div>
+	<div style="margin-top:30px;">
+		How to find your Amazon Turk ID?
+		<ol>
+			<li>Right click on "Your Account" and choose "Open Link in New Tab"</li>
+			<li>In the opened page, you can find your Amazon Turk ID</li>
+		</ol>
+		<img src="{{ escape(handler.settings["base_url"])+"static/img/amazon_turk_ID.png" }}" width="90%"/>
+	</div>
+</body>
+
+</html>
