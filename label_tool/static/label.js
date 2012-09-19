@@ -134,7 +134,7 @@ function createPaper() {
 	background = timeline_paper.rect(0, 0, w, h).attr({"fill":"#FFF"});
 
 	background.mousemove(function(evt) {
-		editLabel(evt.offsetX);
+		editLabel(evt.layerX);
 	});
 	background.mousedown(function(evt) {
 		mouse_down = true;
@@ -142,7 +142,7 @@ function createPaper() {
 	background.mouseup(function(evt) {
 		mouse_down = false;
 		if (!ready_to_edit) {
-			seekVideoPercentage(evt.offsetX / w);
+			seekVideoPercentage(evt.layerX / w);
 			resumeVideo();
 		}
 		ready_to_edit = false;
@@ -195,7 +195,7 @@ function startDrawingLabel() {
 	_user_label.data("id", user_label_id);
 	
 	_user_label.mousemove(function(evt) {
-		editLabel(evt.offsetX);
+		editLabel(evt.layerX);
 	});
 	_user_label.mousedown(function(evt) {
 		mouse_down = true;
@@ -203,7 +203,7 @@ function startDrawingLabel() {
 	_user_label.mouseup(function(evt) {
 		mouse_down = false;
 		if (!ready_to_edit) {
-			seekVideoPercentage(evt.offsetX / $("#timeline_container").width());
+			seekVideoPercentage(evt.layerX / $("#timeline_container").width());
 			resumeVideo();
 		}
 		ready_to_edit = false;
@@ -338,7 +338,7 @@ function videoCurrentTime() {
 }
 
 // interact with server
-var test_code = false;
+var test_code = true;
 var test_vidx = "9-RuPL9iN7g";
 function requestNextVideo() {
 	if (test_code) {

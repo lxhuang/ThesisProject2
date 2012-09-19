@@ -13,6 +13,7 @@ from ConfirmHandler import ConfirmHandler
 from WelcomeHandler import WelcomeHandler
 from InputHandler import InputHandler
 from AdminHandler import AdminHandler
+from DataviewHandler import DataviewHandler
 
 define("port", default=8483, type=int)
 define("mysql_host", default="127.0.0.1:3306")
@@ -28,6 +29,7 @@ class Application(tornado.web.Application):
 			(r"/input", InputHandler),
 			(r"/confirm", ConfirmHandler),
 			(r"/secret_admin_page", AdminHandler),
+			(r"/view_data", DataviewHandler),
 		]
 
 		settings = dict(
