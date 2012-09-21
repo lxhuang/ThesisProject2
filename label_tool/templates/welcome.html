@@ -5,6 +5,10 @@
 		body {
 			font-family:"Abadi MT W02 Exra Light","HelveticaNeueW01-45Ligh","HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
 		}
+		.label_type {
+			font-weight: bold;
+			text-decoration: underline;
+		}
 	</style>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type="text/javascript" src="{{ static_url("config.js") }}"></script>
@@ -44,15 +48,16 @@
 </head>
 
 <body>
-	Thank you for participating in our human behavior study. In this study, you are going to watch 14 videos (each is about 2~3 minutes long). Each video features a person's nonverbal reaction when s/he was watching a video. Your task is to label the occurrence of <span>head nod</span> in each video as accurately as possible.<br/><br/>
+	Thank you for participating in our human behavior study. In this study, you are going to watch 14 videos (each is about 2~3 minutes long). Each video features a person's nonverbal reactions when s/he was watching a video. Your task is to label the occurrence of <span class="label_type">head nod</span> in each video as accurately as possible.<br/><br/>
 
 	<div style="margin-top:10px;">
 		In order to label the videos, you have to use the tool shown as below. Here is a short tutorial:
 		<ol>
 			<li>Press the space bar to start loading the video. The loading progress will be shown in the Box 1.</li>
 			<li>After the video is loaded, press the space bar to start playing the video.</li>
-			<li>While the video is playing, pay attention to the occurrence of <span>head nod</span>. <span>Head nod</span> usually lasts for a period of time.</li>
-			<li>At the beginning of each head nod, press the space bar and hold it; release the space bar until the head nod ends.</li>
+			<li>While the video is playing, pay attention to the occurrence of <span class="label_type">head nod</span>. <span class="label_type">Head nod</span> usually lasts for a period of time.</li>
+			<li>At the beginning of each <span class="label_type">head nod</span>, press the space bar and hold it; release the space bar until the<span class="label_type"> head nod</span> ends.</li>
+			<li>After you finish watching the video, you can adjust the labels by dragging on their boundaries. When you replay the videos, you can change to playback rate to 0.5X, 1.5X or 2.0X.</li>
 		</ol>
 	</div>
 
@@ -73,7 +78,7 @@
 			<li>Right click on "Your Account" and choose "Open Link in New Tab"</li>
 			<li>In the opened page, you can find your Amazon Turk ID</li>
 		</ol>
-		<img src="{{ escape(handler.settings["base_url"])+"static/img/amazon_turk_ID.png" }}" width="90%"/>
+		<img src="{{ escape(handler.settings["base_url"])+"static/img/amazon_turk_ID.png" }}" width="70%"/>
 	</div>
 </body>
 

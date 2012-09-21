@@ -17,9 +17,8 @@
 					base_url + "secret_admin_page",
 					"type=" + type + "&batch=" + batch + "&videos=" + videos,
 					function(dat) {
-						$("#type").val("");
-						$("#batch").val("");
-						$("textarea").val("");
+						$("#status").text("Submitted");
+						setTimeout(function(){$("#status").text("");}, 1000);
 					},
 					"json"
 				);
@@ -29,9 +28,8 @@
 	</script>
 </head>
 <body>
-	<div>
-		This is the page for administrator to use only!
-	</div>
+	<div>Status: <span id="status"></span></div>
+	<div>This is the page for administrator to use only!</div>
 	T <input type="text" id="type"><br/>
 	B <input type="text" id="batch"><br/>
 	VL<textarea cols="50" rows="5"></textarea><br/>
