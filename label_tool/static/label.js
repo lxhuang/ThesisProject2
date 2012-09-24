@@ -260,7 +260,7 @@ function onComplete() {
 	$("#video_control_play").click(function(){ resumeVideo(); return false; });
 	$("#video_control_stop").click(function(){ pauseVideo(); return false; });
 
-	var info = "<li>You can replay the video starting from any position by clicking on the timeline.</li>" +
+	var info = "Please watch the video again to improve your labels.<br/><li>You can replay the video starting from any position by clicking on the timeline.</li>" +
 		"<li>You can drag on the boundary of each label to modify its position.</li>";
 	updateMask(info);
 }

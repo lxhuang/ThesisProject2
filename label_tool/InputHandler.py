@@ -15,12 +15,12 @@ class InputHandler(tornado.web.RequestHandler):
 		turk_id = self.get_argument("tid", None)  # amazon turk Id
 		labels = self.get_argument("dat", None)  # the labels
 		batch = self.get_argument("batch", None)  # which batch is the user in
-		if not label_type or not video_id or not turk_id or not labels or not batch:
+		if not label_type or not video_id or not turk_id or not batch:
 			return None
 
 		# insert labels into the database
 		try:
-			print labels
+			print "labels:", labels
 			self.db.execute("INSERT INTO label_video_data (turk_id, video_id, type, labels, created_at, batch)"
 				"VALUES (%s, %s, %s, %s, UTC_TIMESTAMP(), %s)", turk_id, video_id, label_type, labels, batch
 			)
