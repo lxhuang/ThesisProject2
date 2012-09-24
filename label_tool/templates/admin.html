@@ -13,9 +13,10 @@
 				type = $("#type").val();
 				batch = $("#batch").val();
 				videos = $("textarea").val();
+				task_id = $("#task_id").val();
 				$.post(
 					base_url + "secret_admin_page",
-					"type=" + type + "&batch=" + batch + "&videos=" + videos,
+					"type=" + type + "&batch=" + batch + "&videos=" + videos + "&taskid=" + task_id,
 					function(dat) {
 						$("#status").text("Submitted");
 						setTimeout(function(){$("#status").text("");}, 1000);
@@ -28,11 +29,14 @@
 	</script>
 </head>
 <body>
-	<div>Status: <span id="status"></span></div>
-	<div>This is the page for administrator to use only!</div>
-	T <input type="text" id="type"><br/>
-	B <input type="text" id="batch"><br/>
-	VL<textarea cols="50" rows="5"></textarea><br/>
-	<a href="#" id="submit">Submit</a>
+	<center>
+		<div>Status: <span id="status"></span></div>
+		<div>This is the page for administrator to use only!</div>
+		TaskID <input type="text" id="task_id"><br/>
+		Type <input type="text" id="type"><br/>
+		BatchID <input type="text" id="batch"><br/>
+		VL<textarea cols="50" rows="5"></textarea><br/>
+		<a href="#" id="submit">Submit</a>
+	</center>
 </body>
 </html>
