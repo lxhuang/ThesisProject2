@@ -47,7 +47,8 @@
 							label_type = dat.type;
 							window.location.href = base_url + "label?tid=" + turkId + "&batch=" + batch + "&type=" + label_type;
 						} else if (dat.success == -2) {
-							alert("There are no more tasks.");
+							alert("Sorry, there are no more tasks left. Please come back later or contact the experimenter.");
+							$("#amazon_turk_id").parent().remove();
 						} else {
 							alert("Sorry you cannot participate in this session. Maybe you could come back later.");
 						}
