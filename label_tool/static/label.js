@@ -540,19 +540,6 @@ function debug() {
 }
 
 $(document).ready(function() {
-	// check the browser
-	if ($.browser.msie) {
-		alert("We don't accept Microsoft IE browser. Please use a Chrome or Safari instead.");
-		return;
-	}
-	if ($.browser.opera) {
-		alert("We don't accept Opera. Please use a Chrome or Safari instead.");
-		return;
-	}
-	if ($.browser.mozilla) {
-		alert("Chrome or Safari would be a better choice, though.");
-	}
-
 	$("#check_finish").hide().change(function() {
 		if ($("#check_finish :checkbox").is(":checked")) {
 			$("#check_finish :checkbox").next().text("Uncheck it if you think you have not finished yet.");
