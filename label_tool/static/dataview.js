@@ -231,7 +231,7 @@ function requestCoderList(video_id, type) {
 
 			coder_data.addRows(dat.length);
 			for (i = 0; i < dat.length; ++i) {
-				var coder_id = dat[i]["turk_id"];
+				var coder_id = dat[i];
 				all_coder_array.push(coder_id);
 				coder_data.setCell(i, 0, coder_id);
 			}

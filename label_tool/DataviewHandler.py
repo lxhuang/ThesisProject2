@@ -32,6 +32,7 @@ class DataviewHandler(tornado.web.RequestHandler):
 			except Exception, exception:
 				print "Fails in querying video list"
 				print exception
+
 		# query coder list
 		elif t == Type.CODERLIST:
 			video = self.get_argument("video", None)
@@ -39,8 +40,29 @@ class DataviewHandler(tornado.web.RequestHandler):
 			if not video or not label_type:
 				return None
 			try:
-				coders = self.db.query("SELECT turk_id FROM label_video_data WHERE video_id = %s AND type = %s", video, label_type)
-				self.write( json.dumps(coders) )
+				# query from label_video_user table to get the users who submit verification code
+				coder_batch_map = dict()
+				null_verify_code = "na"
+				valid_coders = self.db.query("SELECT * FROM label_video_user WHERE code != %s order by batch", null_verify_code)
+				for valid_coder in valid_coders:
+					valid_coder_batch   = valid_coder["batch"]
+					valid_coder_turk_id = valid_coder["turk_id"]
+					print valid_coder_batch
+					if valid_coder_turk_id in coder_batch_map:
+						coder_batch_map[valid_coder_turk_id].append(valid_coder_batch)
+					else:
+						coder_batch_map[valid_coder_turk_id] = [valid_coder_batch]
+
+				ret_coders = []
+				coders = self.db.query("SELECT * FROM label_video_data WHERE video_id = %s AND type = %s", video, label_type)
+				for coder in coders:
+					if coder["turk_id"] in coder_batch_map:
+						if coder["batch"] in coder_batch_map[coder["turk_id"]]:
+							ret_coders.append(coder["turk_id"])
+
+				if len(ret_coders) == 0:
+					return None
+				self.write( json.dumps(ret_coders) )
 			except Exception, exception:
 				print "Fails in querying coder list"
 				print exception
@@ -59,6 +81,8 @@ class DataviewHandler(tornado.web.RequestHandler):
 				for turker in turker_array:
 					label = self.db.query("SELECT labels FROM label_video_data WHERE video_id = %s AND type = %s AND turk_id = %s", video, label_type, turker)
 					label = label[0]["labels"]
+					if not label:
+						continue
 					label = label.split("|")
 					for l in label:
 						[beg, end] = l.split(",")
