@@ -159,7 +159,7 @@ function onSelectVideo(video_id) {
 	setTimeout(waitUntilMetaLoaded, 1000);
 }
 function requestTypeList() {
-	types = ["headnod", "headshake", "smile", "eyebrow"];
+	types = ["headnod", "headshake", "headshake1", "smile", "eyebrow"];
 	type_data = new google.visualization.DataTable();
 	type_data.addColumn("string", "type");
 	type_data.addRows(4);

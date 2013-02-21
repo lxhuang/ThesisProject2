@@ -1,0 +1,27 @@
+<html>
+
+<head>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ static_url("config.js") }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#download").click(function(){
+				$.post(
+					base_url + "download",
+					"",
+					function(dat) {
+						alert("downloaded");
+					},
+					"json"
+				);
+				return false;
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<a href="#" id="download">Download</a>
+</body>
+
+</html>

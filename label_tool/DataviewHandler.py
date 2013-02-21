@@ -47,7 +47,10 @@ class DataviewHandler(tornado.web.RequestHandler):
 				for valid_coder in valid_coders:
 					valid_coder_batch   = valid_coder["batch"]
 					valid_coder_turk_id = valid_coder["turk_id"]
-					print valid_coder_batch
+
+					#if int(valid_coder_batch) > 64:
+					#	print valid_coder_batch
+
 					if valid_coder_turk_id in coder_batch_map:
 						coder_batch_map[valid_coder_turk_id].append(valid_coder_batch)
 					else:

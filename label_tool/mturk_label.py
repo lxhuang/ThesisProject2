@@ -14,12 +14,17 @@ from WelcomeHandler import WelcomeHandler
 from InputHandler import InputHandler
 from AdminHandler import AdminHandler
 from DataviewHandler import DataviewHandler
+from DownloadHandler import DownloadHandler
+from AnalysisHandler import AnalysisHandler
 
 define("port", default=8483, type=int)
+
 define("mysql_host", default="127.0.0.1:3306")
+#define("mysql_host", default="23.23.224.29:3306")
 define("mysql_database", default="mturk")
 define("mysql_user", default="root")
 define("mysql_password", default="")
+#define("mysql_password", default="rhubarb")
 
 class Application(tornado.web.Application):
 	def __init__(self):
@@ -30,6 +35,8 @@ class Application(tornado.web.Application):
 			(r"/confirm", ConfirmHandler),
 			(r"/secret_admin_page", AdminHandler),
 			(r"/view_data", DataviewHandler),
+			(r"/download", DownloadHandler),
+			(r"/analysis", AnalysisHandler),
 		]
 
 		settings = dict(
